@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 require_once("./classes/Template.php");
@@ -9,11 +8,14 @@ $page->finalizeBottomSection();
 
 print $page->getTopSection();
 
-print '<form action="formConfirmation.php" method="POST">
-Email: <input type="text" name="email"><br />
-CC Number: <input type="text" name="num"><br />
-<input type="submit" name="submit">
-</form> ';
+print ' <form name="formInput" action="formConfirmation.php" method="POST">
+
+			Email: <input type="text" name="email"><br/>
+			CC Number: <input type="text" name="num" id="num"><br/>
+			
+			<input type="submit" name="submit" value="submit">
+
+		</form>';
 
 print $page->getBottomSection();
 

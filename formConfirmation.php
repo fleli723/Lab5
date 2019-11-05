@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 require_once("./classes/Template.php");
 $page = new Template("Confirmation Page");
 $page->finalizeTopSection();
@@ -9,15 +8,30 @@ $page->finalizeBottomSection();
 
 print $page->getTopSection();
 
-print '<form action="go.php" method="POST">
-Email: <input type="text" name="email"><br />
-CC Number: <input type="text" name="num"><br />
-<input type="submit" name="submit">
-</form> ';
+if (isset($_POST['num']) && isset($_POST['email'])) 
+{
+	$_SESSION['num'] = $_POST['num'];
+	$_SESSION['email'] = $_POST['email'];
+}
 
-//$_SESSION['num'] = $creditNum;\
-$creditNum = $_SESSION['num'];
-print $creditNum;
+if (strlen($_SESSION['num']) == 16)//16 chars for cc and valid email
+{
+$lastFour = substr($_SESSION['num'], -4);
+$printNum = 'xxxxxxxxxxxx' . $lastFour;
+
+print ' <form action="formPlaceOrder.php" method="POST">
+			Email: ' . $_SESSION['email'] . '<br/>
+			CC Number: ' . $printNum . '<br/>
+			
+			<input type="submit" name="Place Order">
+			
+	    </form>';
+		
+}
+else {
+print '<p> enter valid stuff pls</p>';
+		
+}
 
 print $page->getBottomSection();
 
