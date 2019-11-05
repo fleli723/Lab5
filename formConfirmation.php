@@ -8,10 +8,20 @@ $page->finalizeBottomSection();
 
 print $page->getTopSection();
 
+//split up the isset and for post num and post email 
+
 if (isset($_POST['num']) && isset($_POST['email'])) 
 {
 	$_SESSION['num'] = $_POST['num'];
-	$_SESSION['email'] = $_POST['email'];
+
+	
+
+	$errors['email'] = "PHP - The email is required";
+	if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+			$errors['email']= "PHP - Please enter a valid email address or CC number";
+	}else{
+			$_SESSION['email'] = $_POST['email'];
+	}//endif
 }
 
 if (strlen($_SESSION['num']) == 16)//16 chars for cc and valid email
@@ -25,12 +35,10 @@ print ' <form action="formPlaceOrder.php" method="POST">
 			
 			<input type="submit" name="Place Order">
 			
-	    </form>';
-		
+	    </form>';	
 }
 else {
-print '<p> enter valid stuff pls</p>';
-		
+	print $errors['email'];	
 }
 
 print $page->getBottomSection();

@@ -8,7 +8,7 @@ $page->finalizeBottomSection();
 
 print $page->getTopSection();
 
-
+//use isset on session first, then print error / what should be shown
 
 print ' <form action="formPlaceOrder.php" method="POST">
 			Email: ' . $_SESSION['email'] . '<br/>
@@ -17,9 +17,6 @@ print ' <form action="formPlaceOrder.php" method="POST">
 			
 	    </form>';
 
-//$_SESSION['num'] = $creditNum;\
-//$creditNum = $_SESSION['num'];
-//print $creditNum;
 
 print $page->getBottomSection();
 
