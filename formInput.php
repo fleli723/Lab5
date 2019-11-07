@@ -8,10 +8,10 @@ $page->finalizeBottomSection();
 
 print $page->getTopSection();
 
-print ' <form name="formInput" action="formConfirmation.php" method="POST">
+print  '<form name="formInput" action="formConfirmation.php" method="POST">
 
 			Email: <input type="text" name="email"><br/>
-			CC Number: <input type="text" name="num" id="num"><br/>
+			CC Number: <input type="text" name="num"><br/>
 			
 			<input type="submit" name="submit" value="submit">
 

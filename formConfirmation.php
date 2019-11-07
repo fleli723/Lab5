@@ -8,23 +8,38 @@ $page->finalizeBottomSection();
 
 print $page->getTopSection();
 
-//split up the isset and for post num and post email 
 
-if (isset($_POST['num']) && isset($_POST['email'])) 
+$validCC = false;
+$validEmail = false;
+
+if (isset($_POST['num']) && strlen($_POST['num']) == 16 && is_numeric($_POST['num']))
 {
 	$_SESSION['num'] = $_POST['num'];
-
-	
-
-	$errors['email'] = "PHP - The email is required";
-	if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
-			$errors['email']= "PHP - Please enter a valid email address or CC number";
-	}else{
-			$_SESSION['email'] = $_POST['email'];
-	}//endif
+	$validCC = true;
+}
+else
+{
+	$errors['num'] = "PHP - Please enter a valid credit card number";
 }
 
-if (strlen($_SESSION['num']) == 16)//16 chars for cc and valid email
+if (isset($_POST['email']) && $_POST['email'] != '')
+{
+	if(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL))
+	{
+			$_SESSION['email'] = $_POST['email'];
+			$validEmail = true;
+	}
+	else
+	{
+			$errors['email']= "PHP - Please enter a valid email address";
+	}
+}
+else
+{
+		$errors['email'] = "PHP - The email is required";
+}
+
+if ($validCC == true && $validEmail == true)
 {
 $lastFour = substr($_SESSION['num'], -4);
 $printNum = 'xxxxxxxxxxxx' . $lastFour;
@@ -37,8 +52,17 @@ print ' <form action="formPlaceOrder.php" method="POST">
 			
 	    </form>';	
 }
-else {
-	print $errors['email'];	
+else 
+{
+	if (isset($errors['email'])) 
+	{
+		print $errors['email'] . '<br>';
+	}
+	
+	if (isset($errors['num']))
+	{
+		print $errors['num'];
+	}
 }
 
 print $page->getBottomSection();

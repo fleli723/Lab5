@@ -10,12 +10,18 @@ print $page->getTopSection();
 
 //use isset on session first, then print error / what should be shown
 
-print ' <form action="formPlaceOrder.php" method="POST">
-			Email: ' . $_SESSION['email'] . '<br/>
-			CC Number: ' . $_SESSION['num'] . '<br/>
+if(isset($_SESSION['email']) && isset($_SESSION['num']))
+{
+	print ' <form action="formPlaceOrder.php" method="POST">
+				Email: ' . $_SESSION['email'] . '<br/>
+				CC Number: ' . $_SESSION['num'] . '<br/>
+			</form>';
+}else 
+{
+	print 'An error has occured, please submit your order again';
+}
 
-			
-	    </form>';
+
 
 
 print $page->getBottomSection();
