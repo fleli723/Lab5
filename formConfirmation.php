@@ -22,22 +22,16 @@ else
 	$errors['num'] = "PHP - Please enter a valid credit card number";
 }
 
-if (isset($_POST['email']) && $_POST['email'] != '')
+if (isset($_POST['email']) && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL))
 {
-	if(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL))
-	{
-			$_SESSION['email'] = $_POST['email'];
-			$validEmail = true;
-	}
-	else
-	{
-			$errors['email']= "PHP - Please enter a valid email address";
-	}
+	$_SESSION['email'] = $_POST['email'];
+	$validEmail = true;
 }
 else
 {
-		$errors['email'] = "PHP - The email is required";
+	$errors['email']= "PHP - Please enter a valid email address";
 }
+
 
 if ($validCC == true && $validEmail == true)
 {
