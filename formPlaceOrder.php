@@ -19,7 +19,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['num']))
 
 }else 
 {
-	print 'An error has occured, please submit your order again';
+	print '<h1>An error has occured, please submit your order again</h1>';
 }
 
 
