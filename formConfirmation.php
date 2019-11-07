@@ -49,7 +49,6 @@ print ' <form action="formPlaceOrder.php" method="POST">
 			CC Number: ' . $printNum . '<br/>
 			
 			<input type="submit" name="Place Order">
-			
 	    </form>';	
 }
 else 
